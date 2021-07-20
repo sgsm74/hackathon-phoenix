@@ -1,4 +1,4 @@
-![synergy](https://github.com/sgsm74/synergy/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true) 
+![synergy](https://github.com/sgsm74/hackathon-phoenix/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true) 
 # synergy
 
 A new Flutter project.
