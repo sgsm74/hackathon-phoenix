@@ -93,7 +93,10 @@ class UserView extends StatelessWidget {
                   "Biography:",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-                Text(user.biography)
+                Text(
+                  user.biography,
+                  textAlign: TextAlign.justify,
+                )
               ],
             ),
           ),
