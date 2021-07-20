@@ -11,53 +11,65 @@ class UserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: ListView(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Container(
-            width: 200,
-            height: 200,
+            width: double.infinity,
+            height: MediaQuery.of(context).size.width / 2,
+            margin: EdgeInsets.symmetric(horizontal: 25),
+            decoration: BoxDecoration(
+              //color: Colors.red,
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
             child: Stack(
               alignment: Alignment.topRight,
-              fit: StackFit.loose,
+              //fit: StackFit.loose,
               children: [
                 Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(
-                      Radius.circular(20),
+                      Radius.circular(10),
                     ),
-                    child: Image.asset(user.avatar),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: 40),
-                  child: Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Text(
-                        user.rating.toString(),
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 25,
-                      ),
-                    ],
+                    child: Image.asset(
+                      user.avatar,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Text(
-            user.firstName + user.lastName,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                user.firstName + user.lastName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              Container(
+                //margin: EdgeInsets.only(right: 40),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      user.rating.toString(),
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 25,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: EdgeInsets.all(25.0),

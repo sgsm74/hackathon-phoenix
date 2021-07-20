@@ -10,7 +10,7 @@ class RewardForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: Container(
         child: ListView(
           physics: BouncingScrollPhysics(),

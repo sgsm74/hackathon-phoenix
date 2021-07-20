@@ -10,7 +10,7 @@ class More extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: Container(
         child: ListView(
           children: [

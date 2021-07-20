@@ -130,7 +130,7 @@ class _MessageViewState extends State<MessageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(

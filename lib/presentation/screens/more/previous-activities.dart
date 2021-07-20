@@ -20,7 +20,7 @@ class _PreviousActivitiesState extends State<PreviousActivities> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar('Synergy'),
+      appBar: CustomAppBar(title: "Synergy"),
       body: ListView.builder(
         itemCount: activities.length,
         itemBuilder: (BuildContext context, int index) {

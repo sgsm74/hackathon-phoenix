@@ -9,7 +9,7 @@ class Champion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:synergy/data/models/user.dart';
-import 'package:synergy/presentation/screens/activity/widgets/people.dart';
 import 'package:synergy/presentation/screens/home/widgets/people.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
@@ -17,7 +16,7 @@ class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: ListView(
         children: [
           Center(

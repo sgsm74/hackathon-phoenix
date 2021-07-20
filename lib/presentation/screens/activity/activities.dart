@@ -16,7 +16,7 @@ class _ActivitiesState extends State<Activities> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Synergy"),
+      appBar: CustomAppBar(title: "Synergy"),
       body: AllActivities(list: activities),
       bottomNavigationBar: CustomBottomNavbar(currentIndex: 1),
     );
