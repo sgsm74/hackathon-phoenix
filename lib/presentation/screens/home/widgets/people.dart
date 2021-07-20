@@ -8,11 +8,11 @@ Widget rowPeople(String title, List<User> list) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      headingTitle(title),
+      headingTitle(title, () {}),
       Container(
         height: 250,
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        margin: EdgeInsets.only(top: 10.0, left: 12),
+        //padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -144,13 +144,23 @@ Widget rowPeople(String title, List<User> list) {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
                     child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(
                           list[index].rating.toString(),
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
                         ),
                         Icon(
                           Icons.star,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget headingTitle(String title) {
+Widget headingTitle(String title, Function() function) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -13,16 +13,21 @@ Widget headingTitle(String title) {
           ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(right: 10.0),
-        child: Text(
-          "See all >",
-          style: TextStyle(
-            fontSize: 13,
-            color: Colors.blue[300],
-          ),
-        ),
-      ),
+      title != ''
+          ? GestureDetector(
+              onTap: function,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Text(
+                  "See all >",
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.blue[300],
+                  ),
+                ),
+              ),
+            )
+          : Text(''),
     ],
   );
 }

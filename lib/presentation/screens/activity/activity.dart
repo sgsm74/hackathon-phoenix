@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:synergy/data/models/user.dart';
 import 'package:synergy/presentation/screens/activity/widgets/people.dart';
+import 'package:synergy/presentation/screens/home/widgets/people.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
 
@@ -17,14 +18,11 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("Synergy"),
-      body: Column(
+      body: ListView(
         children: [
-          SizedBox(
-            height: 10,
-          ),
           Center(
             child: Container(
-              height: 200,
+              height: MediaQuery.of(context).size.width / 1.5,
               width: MediaQuery.of(context).size.width / 1.5,
               child: Image.asset(
                 "assets/activity/tennis-large.png",
@@ -32,10 +30,17 @@ class _ActivityState extends State<Activity> {
               ),
             ),
           ),
-          SizedBox(
-            height: 50,
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            child: Text(
+              "Tennis",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+              ),
+            ),
           ),
-          peopleNearbyForSpecificActivity("Interested People Nearby", users),
+          rowPeople("Interested People Nearby", users),
         ],
       ),
       bottomNavigationBar: CustomBottomNavbar(

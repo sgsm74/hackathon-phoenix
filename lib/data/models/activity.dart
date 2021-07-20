@@ -67,6 +67,10 @@ class Activity {
       Activity(
           name: 'Skate', avatar: "assets/activity/skateboard.png", rating: 2.3),
       Activity(name: 'Yoga', avatar: "assets/activity/yoga.png", rating: 3.3),
+      Activity(
+          name: 'Football', avatar: "assets/activity/yoga.png", rating: 3.3),
+      Activity(
+          name: 'Basketball', avatar: "assets/activity/yoga.png", rating: 5.3),
     ];
     return activitiesList;
   }

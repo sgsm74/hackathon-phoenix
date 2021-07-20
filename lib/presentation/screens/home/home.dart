@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:synergy/data/models/activity.dart';
 import 'package:synergy/data/models/user.dart';
 import 'package:synergy/data/models/workshop.dart';
-import 'package:synergy/presentation/screens/home/widgets/activities.dart';
+import 'package:synergy/presentation/screens/home/widgets/homepage-activities.dart';
 import 'package:synergy/presentation/screens/home/widgets/people.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
@@ -70,7 +70,10 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 10,
           ),
-          rowActivities("Explore Activities", activities),
+          HomePageActivities(
+            title: "Explore Activities",
+            list: activities,
+          ),
           SizedBox(
             height: 10,
           ),
