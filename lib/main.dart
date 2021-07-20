@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Synergy',
       theme: ThemeData(
+        accentColor: Colors.white10,
         textTheme: TextTheme(
           bodyText2: TextStyle(fontFamily: 'Poppins'),
         ),

@@ -4,7 +4,6 @@ import 'package:synergy/data/models/user.dart';
 import 'package:synergy/data/models/workshop.dart';
 import 'package:synergy/presentation/screens/home/widgets/activities.dart';
 import 'package:synergy/presentation/screens/home/widgets/people.dart';
-import 'package:synergy/presentation/screens/home/widgets/workshop.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
 import 'package:synergy/utils/constants.dart';
@@ -18,7 +17,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Activity> activities = Activity.activities();
-
   List<Workshop> workshops = Workshop.workshops();
   List<User> users = User.users();
 
@@ -37,7 +35,10 @@ class _HomeState extends State<Home> {
             ),
             margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              autofocus: false,
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Constants.primaryColor,
@@ -59,10 +60,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           Container(
-            height: 250,
+            height: Constants.getHeight(context) / 4,
             width: MediaQuery.of(context).size.width,
-            child: Image.asset("assets/images/home-background.png",
-                fit: BoxFit.cover),
+            child: Image.asset(
+              "assets/images/home-background.png",
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(
             height: 10,

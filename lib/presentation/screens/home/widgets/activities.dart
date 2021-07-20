@@ -16,7 +16,7 @@ Widget rowActivities(String title, List<Activity> list) {
           itemCount: list.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
+              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 children: [
                   GestureDetector(
@@ -35,7 +35,7 @@ Widget rowActivities(String title, List<Activity> list) {
                                 blurRadius: 15,
                                 offset: Offset(1, 1),
                                 spreadRadius: 2,
-                                color: Colors.grey.shade100,
+                                color: Colors.grey.shade300,
                               ),
                             ],
                             color: Colors.white,
@@ -43,9 +43,14 @@ Widget rowActivities(String title, List<Activity> list) {
                               Radius.circular(10),
                             ),
                           ),
-                          child: Image.asset(
-                            list[index].avatar,
-                            fit: BoxFit.contain,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              list[index].avatar,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Container(

@@ -54,7 +54,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home_rounded),
           label: "Home",
         ),
         BottomNavigationBarItem(

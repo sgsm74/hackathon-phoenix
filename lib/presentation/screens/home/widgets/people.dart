@@ -11,7 +11,8 @@ Widget rowPeople(String title, List<User> list) {
       headingTitle(title),
       Container(
         height: 250,
-        //padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -46,7 +47,7 @@ Widget rowPeople(String title, List<User> list) {
                           blurRadius: 10,
                           offset: Offset(0.0, 0.5),
                           spreadRadius: .01,
-                          color: Colors.grey.shade100,
+                          color: Colors.grey.shade300,
                         ),
                       ],
                       borderRadius: BorderRadius.all(
@@ -89,11 +90,35 @@ Widget rowPeople(String title, List<User> list) {
                                       list[index].firstName,
                                       style: TextStyle(fontSize: 18),
                                     ),
-                                    Text(
-                                      list[index].interest[0] +
-                                          "/" +
-                                          list[index].interest[1],
-                                      style: TextStyle(fontSize: 12),
+                                    Container(
+                                      height: 50,
+                                      width: double.infinity,
+                                      child: Row(
+                                        children: [
+                                          Flexible(
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  list[index].interest.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index1) {
+                                                var interest =
+                                                    list[index].interest;
+                                                if (index1 !=
+                                                    interest.length - 1) {
+                                                  return Text(list[index]
+                                                          .interest[index1] +
+                                                      " / ");
+                                                } else {
+                                                  return Text(list[index]
+                                                      .interest[index1]);
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
