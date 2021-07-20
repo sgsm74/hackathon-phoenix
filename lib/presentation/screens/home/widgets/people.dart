@@ -18,6 +18,7 @@ Widget rowPeople(String title, List<User> list) {
       ),
       Container(
         height: 250,
+        padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

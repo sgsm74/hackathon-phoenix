@@ -71,10 +71,10 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 10,
           ),
-          rowWorkshops("Workshops Nearby", workshops),
+          /* rowWorkshops("Workshops Nearby", workshops),
           SizedBox(
             height: 10,
-          ),
+          ), */
           rowPeople("People Nearby", users),
           SizedBox(
             height: 10,
