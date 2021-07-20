@@ -4,7 +4,7 @@
 
 # Synergy
 
-A new Flutter project.
+A connection towards wellness
 
 # 😍Inspiration
 Our group, Team_Phoenix, were inspired by recent events to make something which helps "Better mental health". Our ambition for this category was to create a platform for connecting people with similar interests. People which connect with one another would then be able to complete their favourite activities together. Synergy targets those who have many time commitments and may otherwise find it difficult to meet new people and maintain a hobby.
