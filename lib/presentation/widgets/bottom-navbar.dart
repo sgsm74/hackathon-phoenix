@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:synergy/presentation/screens/home/home.dart';
-import 'package:synergy/presentation/screens/messages/inbox.dart';
-import 'package:synergy/presentation/screens/more/more.dart';
-import 'package:synergy/presentation/screens/rewards/rewards.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
   final int currentIndex;
@@ -25,28 +21,16 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           _currentIndex = value;
           switch (value) {
             case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Home()),
-              );
+              Navigator.of(context).pushNamed('/home');
               break;
             case 2:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Inbox()),
-              );
+              Navigator.of(context).pushNamed('/inbox');
               break;
             case 3:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Rewards()),
-              );
+              Navigator.of(context).pushNamed('/rewards');
               break;
             case 4:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => More()),
-              );
+              Navigator.of(context).pushNamed('/more');
               break;
             default:
           }

@@ -5,7 +5,10 @@ import 'package:synergy/presentation/screens/auth/signup.dart';
 import 'package:synergy/presentation/screens/champion/champion.dart';
 import 'package:synergy/presentation/screens/home/home.dart';
 import 'package:synergy/presentation/screens/introduction.dart';
+import 'package:synergy/presentation/screens/messages/inbox.dart';
+import 'package:synergy/presentation/screens/more/more.dart';
 import 'package:synergy/presentation/screens/onboard-view.dart';
+import 'package:synergy/presentation/screens/rewards/rewards.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,6 +39,9 @@ class MyApp extends StatelessWidget {
         '/activity': (context) => Activity(),
         //'/user' : (context) => UserView(user: user)
         '/champion': (context) => Champion(),
+        '/inbox': (context) => Inbox(),
+        '/rewards': (context) => Rewards(),
+        '/more': (context) => More(),
       },
     );
   }

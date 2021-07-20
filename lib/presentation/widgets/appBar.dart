@@ -4,10 +4,14 @@ import 'package:synergy/utils/constants.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   const CustomAppBar({Key? key, required this.title}) : super(key: key);
+
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(50);
+
   @override
   Widget build(BuildContext context) {
+    var route = ModalRoute.of(context)!.settings.name;
+
     return AppBar(
       title: Text(
         title,
@@ -21,16 +25,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
-      leading: IconButton(
-        icon: Icon(
-          Icons.map_rounded,
-          color: Constants.primaryColor,
-          size: 25,
-        ),
-        onPressed: () {
-          //Navigator.pop(context);
-        },
-      ),
+      leading: route == '/home'
+          ? IconButton(
+              icon: Icon(
+                Icons.map_rounded,
+                color: Constants.primaryColor,
+                size: 25,
+              ),
+              onPressed: () {
+                //Navigator.pop(context);
+              },
+            )
+          : IconButton(
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: Constants.primaryColor,
+                size: 25,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
       actions: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 10),
