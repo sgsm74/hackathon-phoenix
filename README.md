@@ -1,6 +1,3 @@
-![synergy](https://github.com/sgsm74/hackathon-phoenix/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=B-4zOxOHnPU)
 
 # Synergy
 
