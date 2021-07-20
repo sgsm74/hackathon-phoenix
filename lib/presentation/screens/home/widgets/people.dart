@@ -131,7 +131,7 @@ Widget rowPeople(String title, List<User> list) {
                                       size: 15,
                                     ),
                                     Text(
-                                      "100m",
+                                      " 100m",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ],
