@@ -62,30 +62,38 @@ class _InboxState extends State<Inbox> {
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       height: 70,
                       decoration: BoxDecoration(
-                        color: Color(0xffB8C8E4),
+                        color: Colors.white,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 15,
+                            offset: Offset(1, 1),
+                            spreadRadius: 2,
+                            color: Colors.grey.shade300,
+                          ),
+                        ],
                       ),
                       child: Row(
                         children: [
-                          CircleAvatar(
-                            maxRadius: 30,
-                            backgroundImage: AssetImage(messages[index][0]),
-                          ),
-                          SizedBox(
-                            width: 10,
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: CircleAvatar(
+                              maxRadius: 30,
+                              backgroundImage: AssetImage(messages[index][0]),
+                            ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
                                 messages[index][2],
@@ -94,9 +102,6 @@ class _InboxState extends State<Inbox> {
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.55,
@@ -124,9 +129,18 @@ class _InboxState extends State<Inbox> {
                             height: 70,
                             margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              border: Border.all(
+                              color: Colors.white,
+                              /* border: Border.all(
                                 color: Constants.primaryColor,
-                              ),
+                              ), */
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 15,
+                                  offset: Offset(1, 1),
+                                  spreadRadius: 2,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ],
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
@@ -148,7 +162,8 @@ class _InboxState extends State<Inbox> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Constants.primaryColor,
-                                    fontSize: 18,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
