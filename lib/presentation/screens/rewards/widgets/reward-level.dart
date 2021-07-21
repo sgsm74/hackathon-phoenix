@@ -23,7 +23,7 @@ class RewardLevel extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 70,
+            width: 80,
             height: 70,
             decoration: BoxDecoration(
               color: Color(0xffB8C8E4),
@@ -37,7 +37,7 @@ class RewardLevel extends StatelessWidget {
                 style: TextStyle(
                   color: Constants.primaryColor,
                   fontFamily: 'Poppins',
-                  fontSize: 30,
+                  fontSize: 28,
                   fontWeight: FontWeight.w600,
                 ),
               ),
