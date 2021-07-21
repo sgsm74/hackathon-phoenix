@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:synergy/data/models/activity.dart';
-import 'package:synergy/presentation/screens/activity/activities.dart';
 import 'package:synergy/presentation/widgets/heading.dart';
 import 'package:synergy/utils/constants.dart';
 
@@ -16,10 +15,7 @@ class HomePageActivities extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         headingTitle(title, () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Activities()),
-          );
+          Navigator.of(context).pushNamed('/activities');
         }),
         Container(
           height: Constants.getWidth(context) / 3.5 + 50,
@@ -28,8 +24,14 @@ class HomePageActivities extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
+              EdgeInsets margin;
+              if (index == list.length - 1) {
+                margin = EdgeInsets.only(left: 13, top: 10, right: 13);
+              } else {
+                margin = EdgeInsets.only(left: 13, top: 10);
+              }
               return Container(
-                margin: EdgeInsets.only(left: 13, top: 10),
+                margin: margin,
                 child: Column(
                   children: [
                     GestureDetector(

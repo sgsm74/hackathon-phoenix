@@ -67,21 +67,35 @@ class _AllActivitiesState extends State<AllActivities> {
                             ),
                           ),
                           Container(
+                            margin: EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 5,
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.lightBlue,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
                             child: Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Text(
                                   widget.list[index].rating.toString(),
-                                  style: TextStyle(fontSize: 12),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 Icon(
                                   Icons.star,
                                   color: Colors.amber,
-                                  size: 15,
+                                  size: 12,
                                 ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

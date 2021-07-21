@@ -23,6 +23,9 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
             case 0:
               Navigator.of(context).pushNamed('/home');
               break;
+            case 1:
+              Navigator.of(context).pushNamed('/activities');
+              break;
             case 2:
               Navigator.of(context).pushNamed('/inbox');
               break;

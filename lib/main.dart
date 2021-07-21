@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:synergy/presentation/screens/activity/activities.dart';
 import 'package:synergy/presentation/screens/activity/activity.dart';
 import 'package:synergy/presentation/screens/auth/login.dart';
 import 'package:synergy/presentation/screens/auth/signup.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           '/inbox': (context) => Inbox(),
           '/rewards': (context) => Rewards(),
           '/more': (context) => More(),
+          '/activities': (context) => Activities(),
         },
       ),
     );
