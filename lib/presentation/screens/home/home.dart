@@ -19,7 +19,14 @@ class _HomeState extends State<Home> {
   List<Activity> activities = Activity.activities();
   List<Workshop> workshops = Workshop.workshops();
   List<User> users = User.users();
-
+  static const List<String> _kOptions = <String>[
+    'Tennis',
+    'Basketball',
+    'Football',
+    'Yoga',
+    'Badminton',
+    'Volleyball'
+  ];
   @override
   @override
   Widget build(BuildContext context) {
@@ -29,33 +36,90 @@ class _HomeState extends State<Home> {
         //physics: BouncingScrollPhysics(),
         children: [
           Container(
+            //width: MediaQuery.of(context).size.width - 20,
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.5),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
             ),
             margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              autofocus: false,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+            child: Autocomplete<String>(
+              optionsBuilder: (TextEditingValue textEditingValue) {
+                if (textEditingValue.text == '') {
+                  return const Iterable<String>.empty();
+                }
+                return _kOptions.where((String option) {
+                  return option.contains(textEditingValue.text.toLowerCase());
+                });
+              },
+              onSelected: (String selection) {
+                print('You just selected $selection');
+              },
+              optionsViewBuilder: (context, onSelected, options) {
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: Material(
+                    elevation: 4.0,
+                    child: Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width - 50,
+                      padding: EdgeInsets.zero,
+                      child: ListView(
+                        children: options
+                            .map(
+                              (String option) => GestureDetector(
+                                onTap: () {
+                                  onSelected(option);
+                                },
+                                child: ListTile(
+                                  title: Text(
+                                    option,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              fieldViewBuilder: (context, textEditingController, focusNode,
+                      onFieldSubmitted) =>
+                  TextFormField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.zero,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Constants.primaryColor,
+                      width: 1.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Constants.primaryColor,
+                      width: 1.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search,
                     color: Constants.primaryColor,
-                    width: 1.0,
+                  ),
+                  //border: InputBorder.a,
+                  hintText: "What activity are you looking for?",
+                  hintStyle: TextStyle(
+                    color: Constants.primaryColor,
+                    fontFamily: 'Poppins',
+                    fontSize: 14,
                   ),
                 ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Constants.primaryColor,
-                ),
-                //border: InputBorder.a,
-                hintText: "What activity are you looking for?",
-                hintStyle: TextStyle(
-                  color: Constants.primaryColor,
-                  fontFamily: 'Poppins',
-                  fontSize: 14,
-                ),
+                controller:
+                    textEditingController, //uses fieldViewBuilder TextEditingController
+                focusNode: focusNode,
               ),
             ),
           ),

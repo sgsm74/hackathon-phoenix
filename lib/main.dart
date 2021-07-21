@@ -18,31 +18,40 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Synergy',
-      theme: ThemeData(
-        accentColor: Colors.white10,
-        textTheme: TextTheme(
-          bodyText2: TextStyle(fontFamily: 'Poppins'),
-        ),
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => Introduction(),
-        '/intro': (context) => OnBoardScreen(),
-        '/home': (context) => Home(),
-        '/login': (context) => Login(),
-        '/signup': (context) => SignUp(),
-        '/activity': (context) => Activity(),
-        //'/user' : (context) => UserView(user: user)
-        '/champion': (context) => Champion(),
-        '/inbox': (context) => Inbox(),
-        '/rewards': (context) => Rewards(),
-        '/more': (context) => More(),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
       },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Synergy',
+        theme: ThemeData(
+          accentColor: Colors.white10,
+          textTheme: TextTheme(
+            bodyText2: TextStyle(fontFamily: 'Poppins'),
+          ),
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Introduction(),
+          '/intro': (context) => OnBoardScreen(),
+          '/home': (context) => Home(),
+          '/login': (context) => Login(),
+          '/signup': (context) => SignUp(),
+          '/activity': (context) => Activity(),
+          //'/user' : (context) => UserView(user: user)
+          '/champion': (context) => Champion(),
+          '/inbox': (context) => Inbox(),
+          '/rewards': (context) => Rewards(),
+          '/more': (context) => More(),
+        },
+      ),
     );
   }
 }
