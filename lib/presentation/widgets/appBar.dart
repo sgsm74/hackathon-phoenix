@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 size: 25,
               ),
               onPressed: () {
-                //Navigator.pop(context);
+                Navigator.of(context).pushNamed('/map');
               },
             )
           : IconButton(

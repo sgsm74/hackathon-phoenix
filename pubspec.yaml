@@ -32,6 +32,8 @@ dependencies:
   # cached_network_image: ^3.1.0
   # bottom_navy_bar: ^6.0.0
   # google_fonts: ^2.1.0
+  google_maps_flutter: ^2.0.6
+  geolocator: ^7.3.0
   syncfusion_flutter_gauges: ^19.2.47
 dev_dependencies:
   flutter_test:
@@ -59,6 +61,8 @@ flutter:
     - assets/images/intro-background.png
     - assets/images/congrats.png
     - assets/images/cup.png
+    - assets/images/my-location.png
+    - assets/images/my-location.bmp
     - assets/activity/tennis.png
     - assets/activity/tennis-large.png
     - assets/activity/skateboard.png

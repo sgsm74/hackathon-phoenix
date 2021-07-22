@@ -6,6 +6,7 @@ import 'package:synergy/presentation/screens/auth/signup.dart';
 import 'package:synergy/presentation/screens/champion/champion.dart';
 import 'package:synergy/presentation/screens/home/home.dart';
 import 'package:synergy/presentation/screens/introduction.dart';
+import 'package:synergy/presentation/screens/map/map.dart';
 import 'package:synergy/presentation/screens/messages/inbox.dart';
 import 'package:synergy/presentation/screens/more/more.dart';
 import 'package:synergy/presentation/screens/onboard-view.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           '/rewards': (context) => Rewards(),
           '/more': (context) => More(),
           '/activities': (context) => Activities(),
+          '/map': (context) => NearbyPeopleOnMap(),
         },
       ),
     );
