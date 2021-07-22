@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:synergy/utils/constants.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
   final int currentIndex;
@@ -16,6 +17,9 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       type: BottomNavigationBarType.fixed,
+      selectedItemColor: Constants.primaryColor,
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      selectedFontSize: 13,
       onTap: (value) {
         setState(() {
           _currentIndex = value;
@@ -41,7 +45,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
+          icon: Icon(Icons.home_filled),
           label: "Home",
         ),
         BottomNavigationBarItem(
