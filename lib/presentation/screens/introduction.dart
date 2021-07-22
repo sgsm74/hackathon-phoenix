@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:synergy/presentation/screens/permissions/permissions.dart';
 import 'package:synergy/utils/constants.dart';
 
 class Introduction extends StatefulWidget {
@@ -16,6 +17,8 @@ class _IntroductionState extends State<Introduction> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacementNamed('/intro');
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => PermissionView()));
     });
   }
 

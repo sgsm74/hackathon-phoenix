@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:synergy/presentation/screens/activity/activities.dart';
 import 'package:synergy/presentation/screens/activity/activity.dart';
 import 'package:synergy/presentation/screens/auth/login.dart';
@@ -13,6 +14,13 @@ import 'package:synergy/presentation/screens/onboard-view.dart';
 import 'package:synergy/presentation/screens/rewards/rewards.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
   runApp(MyApp());
 }
 
