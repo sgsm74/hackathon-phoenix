@@ -1,14 +1,14 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+class ResetPassword extends StatefulWidget {
+  ResetPassword({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _LoginState extends State<Login> {
+class _ResetPasswordState extends State<ResetPassword> {
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
   validateEmail(String email) {
@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  "Welcome Back",
+                  "Reset Password",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
@@ -82,61 +82,7 @@ class _LoginState extends State<Login> {
                         },
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        obscureText: obscureText,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.lock_outline_rounded,
-                            size: 20,
-                          ),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                obscureText = !obscureText;
-                              });
-                            },
-                            child: Icon(
-                              obscureText
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                              size: 20,
-                            ),
-                          ),
-                          prefixIconConstraints: BoxConstraints(),
-                          hintText: "  Password",
-                          hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.length > 6 || value.isEmpty) {
-                            return "password must be at least 6 characters";
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 50,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed('/reset-password');
-                            },
-                            child: Container(
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  color: Color(0xff006BFF),
-                                  //fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        height: 20,
                       ),
                       Container(
                         width: double.infinity,
@@ -146,12 +92,13 @@ class _LoginState extends State<Login> {
                             if (_formKey.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text('Processing Data')),
+                                  content: Text('Processing Data'),
+                                ),
                               );
                             }
                           },
                           child: Text(
-                            "Log in",
+                            "Send reset password link",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -197,10 +144,10 @@ class _LoginState extends State<Login> {
                         ),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/signup');
+                            Navigator.of(context).pushNamed('/login');
                           },
                           child: Text(
-                            "Sign up",
+                            "Log in",
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 18,

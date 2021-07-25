@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:synergy/presentation/screens/activity/activities.dart';
 import 'package:synergy/presentation/screens/activity/activity.dart';
 import 'package:synergy/presentation/screens/auth/login.dart';
+import 'package:synergy/presentation/screens/auth/reset-password.dart';
 import 'package:synergy/presentation/screens/auth/signup.dart';
 import 'package:synergy/presentation/screens/champion/champion.dart';
 import 'package:synergy/presentation/screens/home/home.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
           '/home': (context) => Home(),
           '/login': (context) => Login(),
           '/signup': (context) => SignUp(),
+          '/reset-password': (context) => ResetPassword(),
           '/activity': (context) => Activity(),
           //'/user' : (context) => UserView(user: user)
           '/champion': (context) => Champion(),

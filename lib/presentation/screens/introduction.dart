@@ -16,9 +16,9 @@ class _IntroductionState extends State<Introduction> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/intro');
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PermissionView()));
+      Navigator.of(context).pushReplacementNamed('/signup');
+      /* Navigator.push(
+          context, MaterialPageRoute(builder: (context) => PermissionView())); */
     });
   }
 

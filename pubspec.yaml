@@ -36,6 +36,7 @@ dependencies:
   geolocator: ^7.3.0
   syncfusion_flutter_gauges: ^19.2.47
   permission_handler: ^8.1.3
+  email_validator: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,13 +65,17 @@ flutter:
     - assets/images/cup.png
     - assets/images/my-location.png
     - assets/images/my-location.bmp
+    - assets/images/signup.png
+    #activity
     - assets/activity/tennis.png
     - assets/activity/tennis-large.png
     - assets/activity/skateboard.png
     - assets/activity/yoga.png
+    #workshops
     - assets/workshop/wellbeing.png
     - assets/workshop/stress-reduction.png
     - assets/workshop/mental-health.png
+    #users
     - assets/users/connie.png
     - assets/users/dom.png
     - assets/users/kevin.png
