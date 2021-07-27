@@ -47,9 +47,9 @@ class HomePageActivities extends StatelessWidget {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  blurRadius: 15,
-                                  offset: Offset(1, 1),
-                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  offset: Offset(0.0, 0.5),
+                                  spreadRadius: .01,
                                   color: Colors.grey.shade300,
                                 ),
                               ],

@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontFamily: 'Poppins'),
           ),
           primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: Color(0xfff4f7fc),
         ),
         initialRoute: '/',
         routes: {
