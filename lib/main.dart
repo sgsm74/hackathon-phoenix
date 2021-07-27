@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:synergy/data/bloc/auth/auth_bloc.dart';
+import 'package:synergy/data/bloc/auth/auth_event.dart';
 import 'package:synergy/data/bloc/internet/internet_bloc.dart';
 import 'package:synergy/data/bloc/internet/internet_event.dart';
 import 'package:synergy/presentation/screens/activity/activities.dart';
@@ -34,8 +36,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<InternetBloc>(
-      create: (context) => InternetBloc()..add(ListenConnection()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<InternetBloc>(
+          create: (BuildContext context) =>
+              InternetBloc()..add(ListenConnection()),
+        ),
+        BlocProvider<AuthBloc>(
+          create: (BuildContext context) => AuthBloc()..add(AuthUser()),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Synergy',

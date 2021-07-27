@@ -12,25 +12,23 @@ class InternetBloc extends Bloc<NetworkEvent, NetworkState> {
   Stream<NetworkState> mapEventToState(NetworkEvent event) async* {
     try {
       if (event is ListenConnection) {
-        var connectivityResult = await (Connectivity().checkConnectivity());
+        /* var connectivityResult = await (Connectivity().checkConnectivity());
         if (connectivityResult == ConnectivityResult.mobile) {
           yield ConnectionSuccess();
         } else if (connectivityResult == ConnectivityResult.wifi) {
           yield ConnectionSuccess();
         } else {
           yield ConnectionFailure();
-        }
+        } */
 
-        /* connectivityStreamSubscription =
+        connectivityStreamSubscription =
             Connectivity().onConnectivityChanged.listen((result) {
-          print(result);
           add(ConnectionChanged(result == ConnectivityResult.none
               ? ConnectionFailure()
               : ConnectionSuccess()));
         });
       }
-      if (event is ConnectionChanged) yield event.connection; */
-      }
+      if (event is ConnectionChanged) yield event.connection;
     } on Exception catch (_) {
       yield state;
     }

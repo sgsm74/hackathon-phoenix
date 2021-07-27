@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:synergy/data/models/activity.dart';
 import 'package:synergy/data/models/user.dart';
 import 'package:synergy/data/models/workshop.dart';
+import 'package:synergy/data/repositories/data-repository.dart';
 import 'package:synergy/presentation/screens/home/widgets/homepage-activities.dart';
 import 'package:synergy/presentation/screens/home/widgets/people.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
@@ -19,6 +20,7 @@ class _HomeState extends State<Home> {
   List<Activity> activities = Activity.activities();
   List<Workshop> workshops = Workshop.workshops();
   List<User> users = User.users();
+  DataRepository dataRepo = DataRepository();
   static const List<String> _kOptions = <String>[
     'Tennis',
     'Basketball',
@@ -133,6 +135,12 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(
             height: 10,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await dataRepo.parseHomeData();
+            },
+            child: Text("hi"),
           ),
           HomePageActivities(
             title: "Explore Activities",

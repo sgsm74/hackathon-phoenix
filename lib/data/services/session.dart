@@ -18,12 +18,13 @@ class Session {
   static Future<String> getUserToken() async {
     var box = await Hive.openBox('user');
     var token = box.get('token');
-    box.close();
+    //box.close();
     return token;
   }
 
   static cleanBox() async {
     var box = await Hive.openBox('user');
     box.clear();
+    box.close();
   }
 }
