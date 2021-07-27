@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:synergy/data/api/api.dart';
-import 'package:synergy/data/models/user.dart';
 
 class UserAuthenticaionAPI {
   String registerUrl = Api.register;

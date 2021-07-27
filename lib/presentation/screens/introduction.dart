@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:synergy/data/bloc/internet/internet_bloc.dart';
-import 'package:synergy/data/bloc/internet/internet_event.dart';
 import 'package:synergy/data/bloc/internet/internet_state.dart';
-import 'package:synergy/presentation/screens/permissions/permissions.dart';
+import 'package:synergy/presentation/widgets/snackbar.dart';
 import 'package:synergy/utils/constants.dart';
 
 class Introduction extends StatefulWidget {
@@ -59,15 +58,11 @@ class _IntroductionState extends State<Introduction> {
                 BlocListener<InternetBloc, NetworkState>(
                   listener: (context, state) {
                     if (state is ConnectionFailure) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("No Internet connection"),
-                        duration: Duration(seconds: 5),
-                      ));
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(mySnackBar("No Internet connection"));
                     } else if (state is ConnectionSuccess) {
                       Timer(Duration(seconds: 3), () {
                         Navigator.of(context).popAndPushNamed('/signup');
-                        /* Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PermissionView())); */
                       });
                     } else {
                       print(state);

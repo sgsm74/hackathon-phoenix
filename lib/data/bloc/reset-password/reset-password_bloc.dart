@@ -6,7 +6,6 @@ import 'package:http/http.dart';
 import 'package:synergy/data/bloc/reset-password/ResetPassword_event.dart';
 import 'package:synergy/data/bloc/reset-password/ResetPassword_state.dart';
 import 'package:synergy/data/repositories/user-repository.dart';
-import 'package:synergy/data/services/getLocation.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ResetPasswordBloc() : super(InitialResetPassword());
