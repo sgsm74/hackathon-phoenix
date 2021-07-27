@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:synergy/data/models/activity.dart';
 import 'package:synergy/data/models/user.dart';
 import 'package:synergy/data/models/workshop.dart';
+import 'package:synergy/data/repositories/data-repository.dart';
+import 'package:synergy/data/services/session.dart';
 import 'package:synergy/presentation/screens/home/widgets/homepage-activities.dart';
 import 'package:synergy/presentation/screens/home/widgets/people.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
@@ -149,7 +153,7 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 10,
           ),
-          rowPeople("Trainers Nearby", users)
+          rowPeople("Trainers Nearby", users),
         ],
       ),
       bottomNavigationBar: CustomBottomNavbar(

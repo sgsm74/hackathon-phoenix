@@ -1,5 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/reset-password/ResetPassword_event.dart';
+import 'package:synergy/data/bloc/reset-password/ResetPassword_state.dart';
+import 'package:synergy/data/bloc/reset-password/reset-password_bloc.dart';
+import 'package:synergy/presentation/widgets/snackbar.dart';
+import 'package:synergy/utils/constants.dart';
 
 class ResetPassword extends StatefulWidget {
   ResetPassword({Key? key}) : super(key: key);
@@ -9,8 +15,26 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ResetPasswordBloc>(
+      create: (context) => ResetPasswordBloc(),
+      child: ResetPasswordView(),
+    );
+  }
+}
+
+class ResetPasswordView extends StatefulWidget {
+  const ResetPasswordView({Key? key}) : super(key: key);
+
+  @override
+  _ResetPasswordViewState createState() => _ResetPasswordViewState();
+}
+
+class _ResetPasswordViewState extends State<ResetPasswordView> {
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
+  TextEditingController userEmail = TextEditingController();
   validateEmail(String email) {
     return EmailValidator.validate(email);
   }
@@ -18,160 +42,197 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              child: CustomPaint(
-                painter: MyPainter(),
-                child: Container(),
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: CustomPaint(
+                  painter: MyPainter(),
+                  child: Container(),
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.27,
-                horizontal: 25,
-              ),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Reset Password",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontFamily: 'Poppins',
+              Container(
+                margin: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height * 0.27,
+                  horizontal: 25,
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Reset Password",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontFamily: 'Poppins',
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              top: MediaQuery.of(context).size.height * .5,
-              child: Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width - 50,
-                margin: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        enableInteractiveSelection: true,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.email_outlined,
-                            size: 20,
+              Positioned(
+                bottom: 0,
+                top: MediaQuery.of(context).size.height * .5,
+                child: Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width - 50,
+                  margin: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextFormField(
+                          controller: userEmail,
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          enableInteractiveSelection: true,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              size: 20,
+                            ),
+                            prefixIconConstraints: BoxConstraints(),
+                            hintText: "  Email",
+                            hintStyle: TextStyle(
+                              color: Colors.grey[400],
+                            ),
                           ),
-                          prefixIconConstraints: BoxConstraints(),
-                          hintText: "  Email",
-                          hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Enter email address";
-                          } else if (!validateEmail(value)) {
-                            return "Enter valid email address";
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Processing Data'),
-                                ),
-                              );
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Enter email address";
+                            } else if (!validateEmail(value)) {
+                              return "Enter valid email address";
                             }
                           },
-                          child: Text(
-                            "Send reset password link",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
-                          ),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith(
-                              (states) => Color(0xff006BFF),
-                            ),
-                            elevation: MaterialStateProperty.resolveWith(
-                                (states) => 0),
-                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Divider(
-                              color: Colors.grey,
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                List<String> data = [
+                                  userEmail.text,
+                                ];
+                                BlocProvider.of<ResetPasswordBloc>(context)
+                                    .add(ResetPasswordEvent(data));
+                              }
+                            },
+                            child: BlocConsumer<ResetPasswordBloc,
+                                ResetPasswordState>(
+                              listener: (context, state) {
+                                // TODO: implement listener
+                                if (state is SuccessResetPassword) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      mySnackBar(state.message.toString(),
+                                          color: Colors.green));
+                                } else if (state is FailResetPassword) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      mySnackBar(state.message.toString()));
+                                }
+                              },
+                              builder: (context, state) {
+                                if (state is InitialResetPassword) {
+                                  return Text(
+                                    "Reset Password",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  );
+                                } else if (state is LoadingResetPassword) {
+                                  return Container(
+                                    width: 30,
+                                    height: 30,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ),
+                                  );
+                                } else {
+                                  return Text(
+                                    "Reset Password",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  );
+                                }
+                              },
                             ),
-                            Container(
-                              width: 25,
-                              color: Colors.white,
-                              child: Text(
-                                "or",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.grey),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith(
+                                (states) => Constants.primaryColor,
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(4),
-                          ),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/login');
-                          },
-                          child: Text(
-                            "Log in",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 18,
+                              elevation: MaterialStateProperty.resolveWith(
+                                  (states) => 0),
                             ),
                           ),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.resolveWith(
-                              (states) => Colors.transparent,
-                            ),
-                            elevation: MaterialStateProperty.resolveWith(
-                                (states) => 0),
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Divider(
+                                color: Colors.grey,
+                              ),
+                              Container(
+                                width: 25,
+                                color: Colors.white,
+                                child: Text(
+                                  "or",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4),
+                            ),
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).popAndPushNamed('/login');
+                            },
+                            child: Text(
+                              "Log in",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 18,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith(
+                                (states) => Colors.transparent,
+                              ),
+                              elevation: MaterialStateProperty.resolveWith(
+                                  (states) => 0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
-      ),
-      backgroundColor: Color(0xff0059D4),
-    );
+        backgroundColor: Constants.secondryColor);
   }
 }
 
@@ -179,7 +240,7 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint_1 = Paint()
-      ..color = Color(0xff006BFF)
+      ..color = Constants.primaryColor
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.round;
     Path path_1 = Path();

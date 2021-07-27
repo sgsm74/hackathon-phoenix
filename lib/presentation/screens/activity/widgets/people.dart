@@ -68,14 +68,14 @@ Widget peopleNearbyForSpecificActivity(String title, List<User> list) {
                         ),
                       ),
                     ),
-                    Container(
+                    /* Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       width: 100,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            list[index].firstName,
+                            list[index].name,
                             style: TextStyle(fontSize: 20),
                           ),
                           Text(
@@ -86,7 +86,7 @@ Widget peopleNearbyForSpecificActivity(String title, List<User> list) {
                           ),
                         ],
                       ),
-                    ),
+                    ), */
                     Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [

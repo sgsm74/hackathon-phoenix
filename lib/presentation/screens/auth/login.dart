@@ -1,5 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/login/login_bloc.dart';
+import 'package:synergy/data/bloc/login/login_event.dart';
+import 'package:synergy/data/bloc/login/login_state.dart';
+import 'package:synergy/presentation/widgets/snackbar.dart';
+import 'package:synergy/utils/constants.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -9,8 +15,27 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<LoginBloc>(
+      create: (context) => LoginBloc(),
+      child: LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatefulWidget {
+  LoginView({Key? key}) : super(key: key);
+
+  @override
+  _LoginViewState createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
+  TextEditingController userEmail = TextEditingController();
+  TextEditingController userPassword = TextEditingController();
   validateEmail(String email) {
     return EmailValidator.validate(email);
   }
@@ -31,7 +56,7 @@ class _LoginState extends State<Login> {
             ),
             Container(
               margin: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.27,
+                vertical: MediaQuery.of(context).size.height * 0.25,
                 horizontal: 25,
               ),
               child: Align(
@@ -41,6 +66,7 @@ class _LoginState extends State<Login> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
+                    fontWeight: FontWeight.bold,
                     fontFamily: 'Poppins',
                   ),
                 ),
@@ -59,6 +85,7 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextFormField(
+                        controller: userEmail,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         enableInteractiveSelection: true,
@@ -85,6 +112,7 @@ class _LoginState extends State<Login> {
                         height: 10,
                       ),
                       TextFormField(
+                        controller: userPassword,
                         obscureText: obscureText,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -111,7 +139,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         validator: (value) {
-                          if (value!.length > 6 || value.isEmpty) {
+                          if (value!.length < 6 || value.isEmpty) {
                             return "password must be at least 6 characters";
                           }
                         },
@@ -123,13 +151,13 @@ class _LoginState extends State<Login> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
-                                  .pushNamed('/reset-password');
+                                  .popAndPushNamed('/reset-password');
                             },
                             child: Container(
                               child: Text(
                                 "Forgot Password?",
                                 style: TextStyle(
-                                  color: Color(0xff006BFF),
+                                  color: Constants.primaryColor,
                                   //fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -144,22 +172,56 @@ class _LoginState extends State<Login> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Processing Data')),
-                              );
+                              List<String> data = [
+                                userEmail.text,
+                                userPassword.text
+                              ];
+                              BlocProvider.of<LoginBloc>(context)
+                                  .add(LoginUser(data));
                             }
                           },
-                          child: Text(
-                            "Log in",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
+                          child: BlocConsumer<LoginBloc, LoginUserState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                              if (state is SuccessUserLogin) {
+                                Navigator.of(context).popAndPushNamed('/home');
+                              } else if (state is FailUserLogin) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    mySnackBar(state.message.toString()));
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is InitialUserLogin) {
+                                return Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                );
+                              } else if (state is LoadingUserLogin) {
+                                return Container(
+                                  width: 30,
+                                  height: 30,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                );
+                              } else {
+                                return Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.resolveWith(
-                              (states) => Color(0xff006BFF),
+                              (states) => Constants.primaryColor,
                             ),
                             elevation: MaterialStateProperty.resolveWith(
                                 (states) => 0),
@@ -197,7 +259,7 @@ class _LoginState extends State<Login> {
                         ),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/signup');
+                            Navigator.of(context).popAndPushNamed('/signup');
                           },
                           child: Text(
                             "Sign up",
@@ -223,7 +285,7 @@ class _LoginState extends State<Login> {
           ],
         ),
       ),
-      backgroundColor: Color(0xff0059D4),
+      backgroundColor: Constants.secondryColor,
     );
   }
 }
@@ -232,7 +294,7 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint_1 = Paint()
-      ..color = Color(0xff006BFF)
+      ..color = Constants.primaryColor
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.round;
     Path path_1 = Path();

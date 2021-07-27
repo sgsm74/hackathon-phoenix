@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:synergy/data/bloc/internet/internet_bloc.dart';
+import 'package:synergy/data/bloc/internet/internet_event.dart';
 import 'package:synergy/presentation/screens/activity/activities.dart';
 import 'package:synergy/presentation/screens/activity/activity.dart';
 import 'package:synergy/presentation/screens/auth/login.dart';
@@ -14,7 +18,8 @@ import 'package:synergy/presentation/screens/more/more.dart';
 import 'package:synergy/presentation/screens/onboard-view.dart';
 import 'package:synergy/presentation/screens/rewards/rewards.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.white,
@@ -29,14 +34,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
+    return BlocProvider<InternetBloc>(
+      create: (context) => InternetBloc()..add(ListenConnection()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Synergy',

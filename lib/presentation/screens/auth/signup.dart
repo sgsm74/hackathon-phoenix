@@ -1,5 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/register/register_bloc.dart';
+import 'package:synergy/data/bloc/register/register_event.dart';
+import 'package:synergy/data/bloc/register/register_state.dart';
+import 'package:synergy/data/repositories/user-repository.dart';
+import 'package:synergy/presentation/widgets/snackbar.dart';
+import 'package:synergy/utils/constants.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -9,8 +16,29 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (context) => RegisterBloc(), child: SignUpView());
+  }
+}
+
+class SignUpView extends StatefulWidget {
+  const SignUpView({Key? key}) : super(key: key);
+
+  @override
+  _SignUpViewState createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
+  final UserRepository userRepo = UserRepository();
+
+  TextEditingController userName = TextEditingController();
+  TextEditingController userEmail = TextEditingController();
+  TextEditingController userPassword = TextEditingController();
+
   validateEmail(String email) {
     return EmailValidator.validate(email);
   }
@@ -31,7 +59,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Container(
               margin: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.23,
+                vertical: MediaQuery.of(context).size.height * 0.25,
                 horizontal: 25,
               ),
               child: Align(
@@ -41,6 +69,7 @@ class _SignUpState extends State<SignUp> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
+                    fontWeight: FontWeight.bold,
                     fontFamily: 'Poppins',
                   ),
                 ),
@@ -59,6 +88,7 @@ class _SignUpState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextFormField(
+                        controller: userName,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         enableInteractiveSelection: true,
@@ -74,8 +104,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Enter your name";
+                          if (value!.isEmpty || value.length < 3) {
+                            return "Name must be at least 3 characters";
                           }
                         },
                       ),
@@ -83,6 +113,7 @@ class _SignUpState extends State<SignUp> {
                         height: 10,
                       ),
                       TextFormField(
+                        controller: userEmail,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         enableInteractiveSelection: true,
@@ -109,6 +140,7 @@ class _SignUpState extends State<SignUp> {
                         height: 10,
                       ),
                       TextFormField(
+                        controller: userPassword,
                         obscureText: obscureText,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -135,7 +167,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         validator: (value) {
-                          if (value!.length > 6 || value.isEmpty) {
+                          if (value!.length < 6 || value.isEmpty) {
                             return "Password must be at least 6 characters";
                           }
                         },
@@ -149,22 +181,56 @@ class _SignUpState extends State<SignUp> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Processing Data')),
-                              );
+                              List<String> data = [
+                                userName.text,
+                                userEmail.text,
+                                userPassword.text
+                              ];
+                              BlocProvider.of<RegisterBloc>(context)
+                                  .add(RegisterUser(data));
                             }
                           },
-                          child: Text(
-                            "Sign up",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
+                          child: BlocConsumer<RegisterBloc, RegisterUserState>(
+                            listener: (context, state) {
+                              if (state is SuccessUserRegister) {
+                                Navigator.of(context).popAndPushNamed('/home');
+                              } else if (state is FailUserRegister) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    mySnackBar(state.message.toString()));
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is InitialUserRegister) {
+                                return Text(
+                                  "Sign up",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                );
+                              } else if (state is LoadingUserRegister) {
+                                return Container(
+                                  width: 30,
+                                  height: 30,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                );
+                              } else {
+                                return Text(
+                                  "Sign up",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.resolveWith(
-                              (states) => Color(0xff006BFF),
+                              (states) => Constants.primaryColor,
                             ),
                             elevation: MaterialStateProperty.resolveWith(
                                 (states) => 0),
@@ -201,8 +267,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/login');
+                          onPressed: () async {
+                            Navigator.of(context).popAndPushNamed('/login');
                           },
                           child: Text(
                             "Log in",
@@ -228,7 +294,7 @@ class _SignUpState extends State<SignUp> {
           ],
         ),
       ),
-      backgroundColor: Color(0xff0059D4),
+      backgroundColor: Constants.secondryColor,
     );
   }
 }
@@ -250,7 +316,7 @@ class SignUpPainter extends CustomPainter {
     canvas.drawPath(path_0, paint_0);
 
     Paint paint_1 = Paint()
-      ..color = Color(0xff006BFF)
+      ..color = Constants.primaryColor
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.round;
     Path path_1 = Path();

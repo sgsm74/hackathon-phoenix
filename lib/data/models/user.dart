@@ -1,78 +1,71 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class User {
   final int id;
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  String avatar;
-  String biography;
-  double rating;
-  List<String> interest;
+  final String name;
+  final String email;
+  final String avatar;
+  final String biography;
+  final double rating;
+  final int score;
+  final int isTrainer;
+
   User({
     required this.id,
-    required this.firstName,
-    required this.lastName,
+    required this.name,
     required this.email,
-    required this.password,
     required this.avatar,
     required this.biography,
     required this.rating,
-    required this.interest,
+    required this.score,
+    required this.isTrainer,
   });
 
   User copyWith({
     int? id,
-    String? firstName,
-    String? lastName,
+    String? name,
     String? email,
-    String? password,
     String? avatar,
     String? biography,
     double? rating,
-    List<String>? interest,
+    int? score,
+    int? isTrainer,
   }) {
     return User(
       id: id ?? this.id,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
+      name: name ?? this.name,
       email: email ?? this.email,
-      password: password ?? this.password,
       avatar: avatar ?? this.avatar,
       biography: biography ?? this.biography,
       rating: rating ?? this.rating,
-      interest: interest ?? this.interest,
+      score: score ?? this.score,
+      isTrainer: isTrainer ?? this.isTrainer,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'firstName': firstName,
-      'lastName': lastName,
+      'name': name,
       'email': email,
-      'password': password,
       'avatar': avatar,
       'biography': biography,
       'rating': rating,
-      'interest': interest,
+      'score': score,
+      'isTrainer': isTrainer,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'],
-      firstName: map['firstName'],
-      lastName: map['lastName'],
+      name: map['name'],
       email: map['email'],
-      password: map['password'],
       avatar: map['avatar'],
       biography: map['biography'],
       rating: map['rating'],
-      interest: List<String>.from(map['interest']),
+      score: map['score'],
+      isTrainer: map['isTrainer'],
     );
   }
 
@@ -82,7 +75,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, password: $password, avatar: $avatar, biography: $biography, rating: $rating, interest: $interest)';
+    return 'User(id: $id, name: $name, email: $email, avatar: $avatar, biography: $biography, rating: $rating, score: $score, isTrainer: $isTrainer)';
   }
 
   @override
@@ -91,27 +84,25 @@ class User {
 
     return other is User &&
         other.id == id &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
+        other.name == name &&
         other.email == email &&
-        other.password == password &&
         other.avatar == avatar &&
         other.biography == biography &&
         other.rating == rating &&
-        listEquals(other.interest, interest);
+        other.score == score &&
+        other.isTrainer == isTrainer;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
+        name.hashCode ^
         email.hashCode ^
-        password.hashCode ^
         avatar.hashCode ^
         biography.hashCode ^
         rating.hashCode ^
-        interest.hashCode;
+        score.hashCode ^
+        isTrainer.hashCode;
   }
 
   static List<User> users() {
@@ -121,60 +112,55 @@ class User {
         biography:
             'Hey there! I’m Kevin, and I’m here to meet new people and build a network. I’m very regular in tennis and rate myself at 4.5 right now.I haven’t played badminton regularly/ competitively for about a decade, but looking to start playing seriously again. Solid 2.0 right now, need to get consistency back.',
         email: '',
-        firstName: 'Kevin',
-        lastName: '',
-        interest: ["Tennis", "Painting"],
+        name: '',
         id: 1,
-        password: '',
         rating: 2.3,
+        score: 0,
+        isTrainer: 0,
       ),
       User(
         avatar: 'assets/users/connie.png',
         biography:
             'Hey there! I’m Connie, and I’m here to meet new people and build a network. I’m very regular in tennis and rate myself at 4.5 right now.I haven’t played badminton regularly/ competitively for about a decade, but looking to start playing seriously again. Solid 2.0 right now, need to get consistency back.',
         email: '',
-        firstName: 'Connie',
-        lastName: '',
-        interest: ["Tennis", "Yoga"],
+        name: 'Connie',
         id: 2,
-        password: '',
         rating: 2.8,
+        score: 0,
+        isTrainer: 0,
       ),
       User(
         avatar: 'assets/users/sarah.png',
         biography:
             'Hey there! I’m Sarah, and I’m here to meet new people and build a network. I’m very regular in tennis and rate myself at 4.5 right now.I haven’t played badminton regularly/ competitively for about a decade, but looking to start playing seriously again. Solid 2.0 right now, need to get consistency back.',
         email: '',
-        firstName: 'Sarah',
-        lastName: '',
-        interest: ["Painting", "Yoga"],
+        name: 'Sarah',
         id: 3,
-        password: '',
         rating: 3.8,
+        score: 0,
+        isTrainer: 0,
       ),
       User(
         avatar: 'assets/users/dom.png',
         biography:
             'Hey there! I’m Dom, and I’m here to meet new people and build a network. I’m very regular in tennis and rate myself at 4.5 right now.I haven’t played badminton regularly/ competitively for about a decade, but looking to start playing seriously again. Solid 2.0 right now, need to get consistency back.',
         email: '',
-        firstName: 'Dom',
-        lastName: '',
-        interest: ["Painting", "Yoga"],
+        name: 'Dom',
         id: 4,
-        password: '',
         rating: 3.8,
+        score: 0,
+        isTrainer: 0,
       ),
       User(
         avatar: 'assets/users/lisa.png',
         biography:
             'Hey there! I’m Lisa, and I’m here to meet new people and build a network. I’m very regular in tennis and rate myself at 4.5 right now.I haven’t played badminton regularly/ competitively for about a decade, but looking to start playing seriously again. Solid 2.0 right now, need to get consistency back.',
         email: '',
-        firstName: 'Lisa',
-        lastName: '',
-        interest: ["Painting", "Yoga"],
+        name: 'Lisa',
         id: 5,
-        password: '',
         rating: 3.8,
+        score: 0,
+        isTrainer: 0,
       ),
     ];
     return users;

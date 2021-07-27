@@ -147,7 +147,7 @@ class _MessageViewState extends State<MessageView> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Chat with " + widget.user.firstName + widget.user.lastName,
+                    "Chat with " + widget.user.name,
                   ),
                 ),
               ],

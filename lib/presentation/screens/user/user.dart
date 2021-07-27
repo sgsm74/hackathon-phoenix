@@ -46,7 +46,7 @@ class UserView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                user.firstName + user.lastName,
+                user.name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -80,7 +80,7 @@ class UserView extends StatelessWidget {
                   "Activities Interested in:",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
-                Container(
+                /* Container(
                   height: 50,
                   child: ListView.builder(
                     itemCount: user.interest.length,
@@ -88,7 +88,7 @@ class UserView extends StatelessWidget {
                       return Text(user.interest[index]);
                     },
                   ),
-                ),
+                ), */
                 Text(
                   "Biography:",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),

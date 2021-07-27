@@ -83,11 +83,11 @@ Widget rowPeople(String title, List<User> list) {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
+                                /* Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      list[index].firstName,
+                                      list[index].name,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Container(
@@ -121,7 +121,7 @@ Widget rowPeople(String title, List<User> list) {
                                       ),
                                     ),
                                   ],
-                                ),
+                                ), */
                                 Wrap(
                                   crossAxisAlignment: WrapCrossAlignment.center,
                                   children: [
