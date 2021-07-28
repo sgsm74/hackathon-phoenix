@@ -154,7 +154,7 @@ class _HomeState extends State<Home> {
                 ),
               ); */
                   HomePageActivities(
-                title: "Explore Activities",
+                title: "Favorite Activities",
                 list: snapshot.data,
               );
             },

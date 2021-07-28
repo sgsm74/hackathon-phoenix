@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:synergy/data/models/activity.dart';
 import 'package:synergy/presentation/widgets/heading.dart';
@@ -25,7 +26,7 @@ class HomePageActivities extends StatelessWidget {
             itemCount: list['favoriteActivities'].length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               EdgeInsets margin;
-              if (index == list.length - 1) {
+              if (index == list['favoriteActivities'].length - 1) {
                 margin = EdgeInsets.only(left: 13, top: 10, right: 13);
               } else {
                 margin = EdgeInsets.only(left: 13, top: 10);
@@ -62,9 +63,24 @@ class HomePageActivities extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
-                              child: Image.network(
+                              child:
+                                  /* Image.network(
                                 list['favoriteActivities'][index]['avatar'],
                                 fit: BoxFit.cover,
+                              ), */
+                                  CachedNetworkImage(
+                                imageUrl: list['favoriteActivities'][index]
+                                    ['avatar'],
+                                placeholder: (context, url) => Container(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 1,
+                                    color: Colors.grey[300],
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
                               ),
                             ),
                           ),
