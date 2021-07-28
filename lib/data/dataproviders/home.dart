@@ -18,7 +18,7 @@ class HomeDataAPI {
       );
 
       if (response.statusCode == 200) {
-        print(response.body);
+        //print(response.body);
         return response;
       } else {
         return http.Response(response.body, 400);

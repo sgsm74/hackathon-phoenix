@@ -21,6 +21,7 @@ class _HomeState extends State<Home> {
   List<Workshop> workshops = Workshop.workshops();
   List<User> users = User.users();
   DataRepository dataRepo = DataRepository();
+  Map<String, dynamic> map = {'favoriteActivities': ''};
   static const List<String> _kOptions = <String>[
     'Tennis',
     'Basketball',
@@ -136,16 +137,32 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 10,
           ),
-          ElevatedButton(
-            onPressed: () async {
-              await dataRepo.parseHomeData();
+          FutureBuilder(
+            future: dataRepo.parseHomeData(),
+            initialData: map,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              return /* Container(
+                height: 500,
+                child: ListView.builder(
+                  itemCount: snapshot.data['favoriteActivities'].length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Text(snapshot.data['favoriteActivities'][index]
+                            ['title']
+                        .toString());
+
+                  },
+                ),
+              ); */
+                  HomePageActivities(
+                title: "Explore Activities",
+                list: snapshot.data,
+              );
             },
-            child: Text("hi"),
           ),
-          HomePageActivities(
+          /* HomePageActivities(
             title: "Explore Activities",
             list: activities,
-          ),
+          ), */
           SizedBox(
             height: 10,
           ),

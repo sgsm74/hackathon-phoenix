@@ -7,8 +7,10 @@ class DataRepository {
 
   Future parseHomeData() async {
     final rawData = await dataAPI.fetchData();
-    print(rawData.body.toString());
-    //Map<String, dynamic> map = json.decode(rawData.body);
-    //return map;
+    //await Future.delayed(Duration(seconds: 10));
+    //print(rawData.body.toString());
+    Map<String, dynamic> map = json.decode(rawData.body);
+    //print(map['favoriteActivities']);
+    return map;
   }
 }

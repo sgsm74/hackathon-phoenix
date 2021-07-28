@@ -5,7 +5,7 @@ import 'package:synergy/utils/constants.dart';
 
 class HomePageActivities extends StatelessWidget {
   final String title;
-  final List<Activity> list;
+  final Map<String, dynamic> list;
   const HomePageActivities({Key? key, required this.title, required this.list})
       : super(key: key);
 
@@ -22,7 +22,7 @@ class HomePageActivities extends StatelessWidget {
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: list.length,
+            itemCount: list['favoriteActivities'].length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               EdgeInsets margin;
               if (index == list.length - 1) {
@@ -62,8 +62,8 @@ class HomePageActivities extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
-                              child: Image.asset(
-                                list[index].avatar,
+                              child: Image.network(
+                                list['favoriteActivities'][index]['avatar'],
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -84,7 +84,8 @@ class HomePageActivities extends StatelessWidget {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Text(
-                                  list[index].rating.toString(),
+                                  list['favoriteActivities'][index]['rating']
+                                      .toString(),
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: Colors.white,
@@ -104,9 +105,9 @@ class HomePageActivities extends StatelessWidget {
                     Container(
                       width: 100,
                       child: Text(
-                        list[index].name,
+                        list['favoriteActivities'][index]['title'],
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
