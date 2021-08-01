@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:synergy/data/bloc/auth/auth_bloc.dart';
 import 'package:synergy/data/bloc/auth/auth_state.dart';
-import 'package:synergy/data/bloc/internet/internet_bloc.dart';
-import 'package:synergy/data/bloc/internet/internet_state.dart';
-import 'package:synergy/presentation/widgets/snackbar.dart';
+
 import 'package:synergy/utils/constants.dart';
 
 class Introduction extends StatefulWidget {
@@ -56,17 +54,6 @@ class _IntroductionState extends State<Introduction> {
                     fontFamily: 'Sansita',
                   ),
                   textAlign: TextAlign.center,
-                ),
-                BlocListener<InternetBloc, NetworkState>(
-                  listener: (context, state) {
-                    if (state is ConnectionFailure) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(mySnackBar("No Internet connection"));
-                    } else if (state is ConnectionSuccess) {
-                      print("success");
-                    }
-                  },
-                  child: Container(),
                 ),
                 BlocListener<AuthBloc, AuthUserState>(
                   listener: (context, state) {

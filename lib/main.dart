@@ -4,21 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:synergy/data/bloc/auth/auth_bloc.dart';
 import 'package:synergy/data/bloc/auth/auth_event.dart';
-import 'package:synergy/data/bloc/internet/internet_bloc.dart';
-import 'package:synergy/data/bloc/internet/internet_event.dart';
-import 'package:synergy/presentation/screens/activity/activities.dart';
-import 'package:synergy/presentation/screens/activity/activity.dart';
-import 'package:synergy/presentation/screens/auth/login.dart';
-import 'package:synergy/presentation/screens/auth/reset-password.dart';
-import 'package:synergy/presentation/screens/auth/signup.dart';
-import 'package:synergy/presentation/screens/champion/champion.dart';
-import 'package:synergy/presentation/screens/home/home.dart';
-import 'package:synergy/presentation/screens/introduction.dart';
-import 'package:synergy/presentation/screens/map/map.dart';
-import 'package:synergy/presentation/screens/messages/inbox.dart';
-import 'package:synergy/presentation/screens/more/more.dart';
-import 'package:synergy/presentation/screens/onboard-view.dart';
-import 'package:synergy/presentation/screens/rewards/rewards.dart';
+import 'package:synergy/data/bloc/user/user_bloc.dart';
+import 'package:synergy/presentation/router/app-router.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -33,17 +20,18 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  final AppRouter _appRouter = AppRouter();
+
+  // This wiget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<InternetBloc>(
-          create: (BuildContext context) =>
-              InternetBloc()..add(ListenConnection()),
-        ),
         BlocProvider<AuthBloc>(
           create: (BuildContext context) => AuthBloc()..add(AuthUser()),
+        ),
+        BlocProvider<UserDataBloc>(
+          create: (BuildContext context) => UserDataBloc(),
         ),
       ],
       child: MaterialApp(
@@ -57,23 +45,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Color(0xfff4f7fc),
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => Introduction(),
-          '/intro': (context) => OnBoardScreen(),
-          '/home': (context) => Home(),
-          '/login': (context) => Login(),
-          '/signup': (context) => SignUp(),
-          '/reset-password': (context) => ResetPassword(),
-          '/activity': (context) => Activity(),
-          //'/user' : (context) => UserView(user: user)
-          '/champion': (context) => Champion(),
-          '/inbox': (context) => Inbox(),
-          '/rewards': (context) => Rewards(),
-          '/more': (context) => More(),
-          '/activities': (context) => Activities(),
-          '/map': (context) => NearbyPeopleOnMap(),
-        },
+        onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );
   }

@@ -32,14 +32,9 @@ Widget peopleNearbyForSpecificActivity(String title, List<User> list) {
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UserView(
-                      user: list[index],
-                    ),
-                  ),
-                );
+                /*  Navigator.of(context).pushNamed(
+                    '/user/' + list['nearbyPeoples'][index]['id'],
+                  ); */
               },
               child: Container(
                 decoration: BoxDecoration(

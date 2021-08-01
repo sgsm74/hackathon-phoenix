@@ -25,6 +25,6 @@ class Session {
   static cleanBox() async {
     var box = await Hive.openBox('user');
     box.clear();
-    box.close();
+    //box.close();
   }
 }

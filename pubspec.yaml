@@ -59,45 +59,15 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/first.png
-    - assets/images/second.png
-    - assets/images/third.png
-    - assets/images/apple.png
-    - assets/images/google.png
-    - assets/images/facebook.png
-    - assets/images/home-background.png
-    - assets/images/intro-background.png
-    - assets/images/congrats.png
-    - assets/images/cup.png
-    - assets/images/my-location.png
-    - assets/images/my-location.bmp
-    - assets/images/signup.png
+    - assets/images/
     #activity
-    - assets/activity/tennis.png
-    - assets/activity/tennis-large.png
-    - assets/activity/skateboard.png
-    - assets/activity/yoga.png
+    - assets/activity/
     #workshops
-    - assets/workshop/wellbeing.png
-    - assets/workshop/stress-reduction.png
-    - assets/workshop/mental-health.png
+    - assets/workshop/
     #users
-    - assets/users/connie.png
-    - assets/users/dom.png
-    - assets/users/kevin.png
-    - assets/users/leandra.png
-    - assets/users/lisa.png
-    - assets/users/lucy.png
-    - assets/users/luke.png
-    - assets/users/matt.png
-    - assets/users/max.png
-    - assets/users/sarah.png
-    - assets/users/shari.png
-    - assets/uploads/1.png
-    - assets/uploads/2.png
-    - assets/uploads/3.png
-    - assets/uploads/4.png
-    - assets/uploads/5.png
+    - assets/users/
+    #uploads
+    - assets/uploads/
     #permissions
     - assets/images/permissions/location.png
     - assets/images/permissions/storage.png

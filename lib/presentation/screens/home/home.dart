@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:synergy/data/models/activity.dart';
-import 'package:synergy/data/models/user.dart';
-import 'package:synergy/data/models/workshop.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/user/user_bloc.dart';
+
 import 'package:synergy/data/repositories/data-repository.dart';
 import 'package:synergy/presentation/screens/home/widgets/homepage-activities.dart';
 import 'package:synergy/presentation/screens/home/widgets/people.dart';
@@ -17,29 +17,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Activity> activities = Activity.activities();
-  List<Workshop> workshops = Workshop.workshops();
-  List<User> users = User.users();
   DataRepository dataRepo = DataRepository();
-  Map<String, dynamic> map = {'favoriteActivities': ''};
+  Map<String, dynamic> favoriteActivitiesInitialData = {
+    'favoriteActivities': ''
+  };
+  Map<String, dynamic> nearbyPeoplesInitialDate = {'nearbyPeoples': []};
   static const List<String> _kOptions = <String>[
-    'Tennis',
-    'Basketball',
-    'Football',
-    'Yoga',
-    'Badminton',
-    'Volleyball'
+    'tennis',
+    'basketball',
+    'football',
+    'yoga',
+    'badminton',
+    'volleyball'
   ];
-  @override
-  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "Synergy"),
       body: ListView(
-        //physics: BouncingScrollPhysics(),
         children: [
           Container(
-            //width: MediaQuery.of(context).size.width - 20,
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.5),
               borderRadius: BorderRadius.all(
@@ -57,17 +54,18 @@ class _HomeState extends State<Home> {
                 });
               },
               onSelected: (String selection) {
-                print('You just selected $selection');
+                print('You just selected ' + selection);
               },
-              optionsViewBuilder: (context, onSelected, options) {
+              optionsViewBuilder: (_, onSelected, options) {
                 return Align(
                   alignment: Alignment.topLeft,
                   child: Material(
                     elevation: 4.0,
                     child: Container(
-                      height: 200,
+                      height: 150,
                       width: MediaQuery.of(context).size.width - 50,
                       padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero,
                       child: ListView(
                         children: options
                             .map(
@@ -131,7 +129,7 @@ class _HomeState extends State<Home> {
             width: MediaQuery.of(context).size.width,
             child: Image.asset(
               "assets/images/home-background.png",
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           SizedBox(
@@ -139,42 +137,38 @@ class _HomeState extends State<Home> {
           ),
           FutureBuilder(
             future: dataRepo.parseHomeData(),
-            initialData: map,
+            initialData: favoriteActivitiesInitialData,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              return /* Container(
-                height: 500,
-                child: ListView.builder(
-                  itemCount: snapshot.data['favoriteActivities'].length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Text(snapshot.data['favoriteActivities'][index]
-                            ['title']
-                        .toString());
-
-                  },
-                ),
-              ); */
-                  HomePageActivities(
+              return HomePageActivities(
                 title: "Favorite Activities",
                 list: snapshot.data,
               );
             },
           ),
-          /* HomePageActivities(
-            title: "Explore Activities",
-            list: activities,
-          ), */
           SizedBox(
             height: 10,
           ),
-          /* rowWorkshops("Workshops Nearby", workshops),
-          SizedBox(
-            height: 10,
-          ), */
-          rowPeople("People Nearby", users),
+          FutureBuilder(
+            future: dataRepo.parseHomeData(),
+            initialData: nearbyPeoplesInitialDate,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              return NearByPeoples(
+                list: snapshot.data,
+                title: "People Nearby",
+              );
+            },
+          ),
+          /* NearByPeoples(
+                  list: users,
+                  title: "People Nearby",
+                ), */
           SizedBox(
             height: 10,
           ),
-          rowPeople("Trainers Nearby", users),
+          /* NearByPeoples(
+                  list: users,
+                  title: "Trainers Nearby",
+                ), */
         ],
       ),
       bottomNavigationBar: CustomBottomNavbar(

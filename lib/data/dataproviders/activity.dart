@@ -1,17 +1,16 @@
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:synergy/data/api/api.dart';
-import 'package:synergy/data/services/cache.dart';
 import 'package:synergy/data/services/session.dart';
 
-class HomeDataAPI {
-  String homeUrl = Api.home;
+class ActivityAPI {
+  String activitiesUrl = Api.activities;
 
-  Future<http.Response> fetchData() async {
+  Future<http.Response> fetchActivities() async {
     try {
       String userToken = await Session.getUserToken();
       final Response response = await http.post(
-        Uri.parse(homeUrl),
+        Uri.parse(activitiesUrl),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ' + userToken,
@@ -21,7 +20,6 @@ class HomeDataAPI {
 
       if (response.statusCode == 200) {
         //print(response.body);
-        //Cache.put('HomeData', 'home', response.body);
         return response;
       } else {
         return http.Response(response.body, 400);

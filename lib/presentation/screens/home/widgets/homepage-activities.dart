@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:synergy/data/models/activity.dart';
 import 'package:synergy/presentation/widgets/heading.dart';
 import 'package:synergy/utils/constants.dart';
 
@@ -63,24 +61,9 @@ class HomePageActivities extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
-                              child:
-                                  /* Image.network(
+                              child: Image.network(
                                 list['favoriteActivities'][index]['avatar'],
                                 fit: BoxFit.cover,
-                              ), */
-                                  CachedNetworkImage(
-                                imageUrl: list['favoriteActivities'][index]
-                                    ['avatar'],
-                                placeholder: (context, url) => Container(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 1,
-                                    color: Colors.grey[300],
-                                  ),
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
                               ),
                             ),
                           ),

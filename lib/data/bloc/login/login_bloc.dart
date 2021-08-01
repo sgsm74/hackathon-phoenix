@@ -20,11 +20,12 @@ class LoginBloc extends Bloc<LoginUserEvent, LoginUserState> {
         event.data[0],
         event.data[1],
       ]);
-      Map<String, dynamic> map = json.decode(response.body);
+
       //await Future.delayed(Duration(seconds: 2));
       if (response.statusCode == 200) {
         yield SuccessUserLogin();
       } else if (response.statusCode != 200) {
+        Map<String, dynamic> map = json.decode(response.body);
         yield FailUserLogin(map["message"]);
       }
     }

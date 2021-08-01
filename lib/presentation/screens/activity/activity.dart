@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:synergy/data/models/user.dart';
-import 'package:synergy/presentation/screens/home/widgets/people.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
 
@@ -39,7 +38,7 @@ class _ActivityState extends State<Activity> {
               ),
             ),
           ),
-          rowPeople("Interested People Nearby", users),
+          //rowPeople("Interested People Nearby", users),
         ],
       ),
       bottomNavigationBar: CustomBottomNavbar(

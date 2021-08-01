@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:synergy/data/dataproviders/user-auth.dart';
+import 'package:synergy/data/dataproviders/user-dataprovider.dart';
 import 'package:synergy/data/models/user.dart';
 import 'package:synergy/data/services/session.dart';
 
 class UserRepository {
   final UserAuthenticaionAPI userAuthAPI = UserAuthenticaionAPI();
-
+  final UserDataProvider userDataProvider = UserDataProvider();
   Future userRegister(List data) async {
     final rawUser = await userAuthAPI.register(data);
     if (rawUser.statusCode == 200) {
@@ -39,9 +40,15 @@ class UserRepository {
     }
   }
 
+  Future fetchUserData(int id) async {
+    final rawData = await userDataProvider.fetchUserData(id);
+    Map<String, dynamic> map = json.decode(rawData.body);
+    return map;
+  }
+
   writeToSession(Map<String, dynamic> map) async {
-    Session.cleanBox();
-    Session.write(
+    await Session.cleanBox();
+    await Session.write(
       User(
         avatar: map['user']['avatar'],
         biography: map['user']['biography'],
