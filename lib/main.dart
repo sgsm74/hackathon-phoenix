@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:synergy/data/bloc/activity/activity_bloc.dart';
 import 'package:synergy/data/bloc/auth/auth_bloc.dart';
 import 'package:synergy/data/bloc/auth/auth_event.dart';
 import 'package:synergy/data/bloc/user/user_bloc.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<UserDataBloc>(
           create: (BuildContext context) => UserDataBloc(),
+        ),
+        BlocProvider<ActivityBloc>(
+          create: (BuildContext context) => ActivityBloc(),
         ),
       ],
       child: MaterialApp(

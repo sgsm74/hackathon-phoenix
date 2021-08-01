@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/activity/activity_bloc.dart';
+import 'package:synergy/data/bloc/activity/activity_event.dart';
 import 'package:synergy/utils/constants.dart';
 
 class AllActivities extends StatefulWidget {
@@ -31,6 +34,10 @@ class _AllActivitiesState extends State<AllActivities> {
               children: [
                 GestureDetector(
                   onTap: () {
+                    print(widget.list['activities'][index]['id']);
+                    BlocProvider.of<ActivityBloc>(context).add(
+                        ActivityDataFetchEvent(
+                            widget.list['activities'][index]['id']));
                     Navigator.of(context).pushNamed('/activity');
                   },
                   child: Stack(

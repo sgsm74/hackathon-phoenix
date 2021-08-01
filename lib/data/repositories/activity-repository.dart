@@ -13,4 +13,10 @@ class ActivityRepository {
     //print(map['favoriteActivities']);
     return map;
   }
+
+  Future parseActivityData(int id) async {
+    final rawData = await dataAPI.fetchActivityData(id);
+    Map<String, dynamic> map = json.decode(rawData.body);
+    return map;
+  }
 }

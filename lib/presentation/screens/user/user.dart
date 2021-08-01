@@ -133,7 +133,11 @@ class UserView extends StatelessWidget {
               ],
             );
           } else if (state is InitialUserDataFetch) {
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(
+                color: Constants.primaryColor,
+              ),
+            );
           } else if (state is FailureUserDataFetch) {
             return Text("Failed");
           } else {

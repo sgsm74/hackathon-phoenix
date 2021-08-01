@@ -10,4 +10,6 @@ class Api {
   static const activities = baseUrl + '/activities';
   //get user info
   static const user = baseUrl + '/user';
+  //get activity info
+  static const activity = baseUrl + '/activity';
 }

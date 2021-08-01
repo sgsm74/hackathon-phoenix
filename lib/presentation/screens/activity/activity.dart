@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/activity/activity_bloc.dart';
+import 'package:synergy/data/bloc/activity/activity_state.dart';
 import 'package:synergy/data/models/user.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
+import 'package:synergy/utils/constants.dart';
 
 class Activity extends StatefulWidget {
   Activity({Key? key}) : super(key: key);
@@ -16,30 +20,45 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "Synergy"),
-      body: ListView(
-        children: [
-          Center(
-            child: Container(
-              height: MediaQuery.of(context).size.width / 1.5,
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: Image.asset(
-                "assets/activity/tennis-large.png",
-                fit: BoxFit.cover,
+      body: BlocBuilder<ActivityBloc, ActivityDataState>(
+        builder: (context, state) {
+          if (state is SuccessActivityDataFetchState) {
+            return ListView(
+              children: [
+                Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.width / 1.5,
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Image.network(
+                      state.data["activity"]["avatar"],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    state.data["activity"]["title"],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+                //rowPeople("Interested People Nearby", users),
+              ],
+            );
+          } else if (state is LoadingActivityDataFetchState ||
+              state is InitialActivityDataFetchState) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Constants.primaryColor,
               ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              "Tennis",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 25,
-              ),
-            ),
-          ),
-          //rowPeople("Interested People Nearby", users),
-        ],
+            );
+          } else {
+            return Text("faild");
+          }
+        },
       ),
       bottomNavigationBar: CustomBottomNavbar(
         currentIndex: 1,

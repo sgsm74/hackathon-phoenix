@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:synergy/data/bloc/activity/activity_bloc.dart';
+import 'package:synergy/data/bloc/activity/activity_event.dart';
+import 'package:synergy/data/bloc/user/user_bloc.dart';
 import 'package:synergy/presentation/widgets/heading.dart';
 import 'package:synergy/utils/constants.dart';
 
@@ -35,6 +39,9 @@ class HomePageActivities extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        BlocProvider.of<ActivityBloc>(context).add(
+                            ActivityDataFetchEvent(
+                                list['favoriteActivities'][index]['id']));
                         Navigator.of(context).pushNamed('/activity');
                       },
                       child: Stack(
