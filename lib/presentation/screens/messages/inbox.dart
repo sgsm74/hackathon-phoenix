@@ -42,7 +42,7 @@ class _InboxState extends State<Inbox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Synergy"),
+      appBar: MyAppBar(title: "Synergy"),
       body: Container(
         decoration: BoxDecoration(
           color: Colors.white,

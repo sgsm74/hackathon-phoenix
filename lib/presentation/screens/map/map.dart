@@ -72,7 +72,7 @@ class _NearbyPeopleOnMapState extends State<NearbyPeopleOnMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: MyAppBar(
         title: "Synergy",
       ),
       body: Container(

@@ -19,7 +19,7 @@ class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Synergy"),
+      appBar: MyAppBar(title: "Synergy"),
       body: BlocBuilder<ActivityBloc, ActivityDataState>(
         builder: (context, state) {
           if (state is SuccessActivityDataFetchState) {

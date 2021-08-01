@@ -13,7 +13,7 @@ class UserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Synergy"),
+      appBar: MyAppBar(title: "Synergy"),
       body: BlocBuilder<UserDataBloc, UserDataStateAbstract>(
         builder: (context, state) {
           if (state is SuccessUserDataFetch) {

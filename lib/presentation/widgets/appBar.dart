@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:synergy/utils/constants.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const CustomAppBar({Key? key, required this.title}) : super(key: key);
+  const MyAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     var route = ModalRoute.of(context)!.settings.name;
-
+    print(route.toString());
     return AppBar(
       title: Text(
         title,

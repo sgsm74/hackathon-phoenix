@@ -11,7 +11,7 @@ class Rewards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Synergy"),
+      appBar: MyAppBar(title: "Synergy"),
       body: DefaultTabController(
         length: 2,
         child: Scaffold(
