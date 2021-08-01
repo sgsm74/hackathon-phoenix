@@ -46,6 +46,10 @@ class UserRepository {
     return map;
   }
 
+  Future userLogout() async {
+    await Session.cleanBox();
+  }
+
   writeToSession(Map<String, dynamic> map) async {
     await Session.cleanBox();
     await Session.write(

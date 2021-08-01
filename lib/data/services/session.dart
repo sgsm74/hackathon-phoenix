@@ -27,4 +27,11 @@ class Session {
     box.clear();
     //box.close();
   }
+
+  static getByKey(String key) async {
+    var box = await Hive.openBox('user');
+    var data = box.get(key);
+    return data;
+    //box.close();
+  }
 }

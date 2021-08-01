@@ -18,11 +18,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontSize: 30,
           fontFamily: 'Sansita',
           fontWeight: FontWeight.bold,
-          color: Constants.primaryColor,
+          color: Colors.white,
         ),
       ),
       centerTitle: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.primaryColor,
       elevation: 0,
       leading: route == '/home'
           ? IconButton(
@@ -38,7 +38,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           : IconButton(
               icon: Icon(
                 Icons.arrow_back_rounded,
-                color: Constants.primaryColor,
+                color: Colors.white,
                 size: 25,
               ),
               onPressed: () {
@@ -55,7 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   '24',
                   style: TextStyle(
-                    color: Constants.primaryColor,
+                    color: Colors.white,
                     fontFamily: 'Poppins',
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Icon(
                   Icons.emoji_events_outlined,
-                  color: Constants.primaryColor,
+                  color: Colors.white,
                   size: 25,
                 ),
               ],
