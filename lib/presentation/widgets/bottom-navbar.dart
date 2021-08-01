@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:synergy/utils/constants.dart';
 
-class CustomBottomNavbar extends StatefulWidget {
+class MyBottomNavbar extends StatefulWidget {
   final int currentIndex;
-  const CustomBottomNavbar({Key? key, required this.currentIndex})
+  const MyBottomNavbar({Key? key, required this.currentIndex})
       : super(key: key);
 
   @override
-  _CustomBottomNavbarState createState() => _CustomBottomNavbarState();
+  _MyBottomNavbarState createState() => _MyBottomNavbarState();
 }
 
-class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
+class _MyBottomNavbarState extends State<MyBottomNavbar> {
   @override
   Widget build(BuildContext context) {
     int _currentIndex = widget.currentIndex;

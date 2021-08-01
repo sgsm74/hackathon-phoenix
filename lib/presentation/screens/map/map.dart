@@ -106,7 +106,7 @@ class _NearbyPeopleOnMapState extends State<NearbyPeopleOnMap> {
         ),
         backgroundColor: Constants.primaryColor,
       ),
-      bottomNavigationBar: CustomBottomNavbar(currentIndex: 0),
+      bottomNavigationBar: MyBottomNavbar(currentIndex: 0),
     );
   }
 }

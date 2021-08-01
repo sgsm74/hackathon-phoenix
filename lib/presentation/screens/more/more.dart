@@ -38,7 +38,7 @@ class More extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavbar(currentIndex: 4),
+      bottomNavigationBar: MyBottomNavbar(currentIndex: 4),
     );
   }
 }

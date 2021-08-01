@@ -179,7 +179,7 @@ class _InboxState extends State<Inbox> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomBottomNavbar(
+      bottomNavigationBar: MyBottomNavbar(
         currentIndex: 2,
       ),
     );

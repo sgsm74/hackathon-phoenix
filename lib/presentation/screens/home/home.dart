@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
                 ), */
         ],
       ),
-      bottomNavigationBar: CustomBottomNavbar(
+      bottomNavigationBar: MyBottomNavbar(
         currentIndex: 0,
       ),
     );

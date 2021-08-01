@@ -45,7 +45,7 @@ class Rewards extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: CustomBottomNavbar(
+      bottomNavigationBar: MyBottomNavbar(
         currentIndex: 3,
       ),
     );

@@ -75,7 +75,7 @@ class _PreviousActivitiesState extends State<PreviousActivities> {
           );
         },
       ),
-      bottomNavigationBar: CustomBottomNavbar(currentIndex: 4),
+      bottomNavigationBar: MyBottomNavbar(currentIndex: 4),
     );
   }
 }

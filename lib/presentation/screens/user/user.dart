@@ -149,7 +149,7 @@ class UserView extends StatelessWidget {
           }
         },
       ),
-      bottomNavigationBar: CustomBottomNavbar(
+      bottomNavigationBar: MyBottomNavbar(
         currentIndex: 1,
       ),
     );

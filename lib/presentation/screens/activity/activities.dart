@@ -27,7 +27,7 @@ class _ActivitiesState extends State<Activities> {
           );
         },
       ),
-      bottomNavigationBar: CustomBottomNavbar(currentIndex: 1),
+      bottomNavigationBar: MyBottomNavbar(currentIndex: 1),
     );
   }
 }

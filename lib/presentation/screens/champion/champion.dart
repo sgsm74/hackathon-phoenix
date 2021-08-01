@@ -25,7 +25,7 @@ class Champion extends StatelessWidget {
           Image.asset("assets/images/congrats.png"),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavbar(currentIndex: 3),
+      bottomNavigationBar: MyBottomNavbar(currentIndex: 3),
     );
   }
 }

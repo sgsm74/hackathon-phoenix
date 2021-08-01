@@ -129,7 +129,7 @@ class RewardForm extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavbar(currentIndex: 3),
+      bottomNavigationBar: MyBottomNavbar(currentIndex: 3),
     );
   }
 }

@@ -60,7 +60,7 @@ class _ActivityState extends State<Activity> {
           }
         },
       ),
-      bottomNavigationBar: CustomBottomNavbar(
+      bottomNavigationBar: MyBottomNavbar(
         currentIndex: 1,
       ),
     );

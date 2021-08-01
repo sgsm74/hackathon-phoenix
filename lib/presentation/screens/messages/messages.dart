@@ -184,7 +184,7 @@ class _MessageViewState extends State<MessageView> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavbar(
+      bottomNavigationBar: MyBottomNavbar(
         currentIndex: 2,
       ),
     );
