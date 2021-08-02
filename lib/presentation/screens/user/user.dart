@@ -4,6 +4,7 @@ import 'package:synergy/data/bloc/user/user_bloc.dart';
 import 'package:synergy/data/bloc/user/user_state.dart';
 import 'package:synergy/presentation/widgets/appBar.dart';
 import 'package:synergy/presentation/widgets/bottom-navbar.dart';
+import 'package:synergy/presentation/widgets/dotsIndicator.dart';
 import 'package:synergy/utils/constants.dart';
 import 'package:synergy/utils/units.dart';
 
@@ -134,18 +135,12 @@ class UserView extends StatelessWidget {
             );
           } else if (state is InitialUserDataFetch) {
             return Center(
-              child: CircularProgressIndicator(
-                color: Constants.primaryColor,
-              ),
+              child: MyDotsIndicator(),
             );
           } else if (state is FailureUserDataFetch) {
             return Text("Failed");
           } else {
-            return Center(
-              child: CircularProgressIndicator(
-                color: Constants.primaryColor,
-              ),
-            );
+            return Center(child: MyDotsIndicator());
           }
         },
       ),
