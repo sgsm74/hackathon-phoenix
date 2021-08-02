@@ -45,11 +45,11 @@ class _MyBottomNavbarState extends State<MyBottomNavbar> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
+          icon: Icon(Icons.grid_view_rounded),
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.sports_tennis_rounded),
+          icon: Icon(Icons.sports_kabaddi_rounded),
           label: "Activities",
         ),
         BottomNavigationBarItem(
